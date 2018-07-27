@@ -1,17 +1,37 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click="btn1">Loading A</button>
+    <button @click="btn2">Loading B</button>
+    <!-- 50 代表loading对象的宽度 -->
+    <!-- 在定义指令时，使用binding.arg接收参数(50) -->
+    <div id="loading" v-loading:50="loading1"></div>
+    <div v-loading:150="loading2"></div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      loading1: false,
+      loading2: false
+    }
+  },
+  methods: {
+    btn1 () {
+      this.loading1 = true
+      setTimeout(() => {
+        this.loading1 = false
+      }, 3000)
+    },
+    btn2 () {
+      this.loading2 = true
+      setTimeout(() => {
+        this.loading2 = false
+      }, 3000)
+    }
   }
 }
 </script>
@@ -23,6 +43,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+#loading {
+  background: #fc0;
 }
 </style>
